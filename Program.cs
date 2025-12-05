@@ -3,15 +3,19 @@ using _PRO.Models;
 
 // ----------< Try Load From Files >----------
 var productsFile = new FileInfo("./db/products.json");
-var loadedProducts = JsonUtils.Load(productsFile, new List<Product>());
-Console.WriteLine($"Loaded {loadedProducts.Count} products from file {productsFile.FullName}");
-
 var ordersFile = new FileInfo("./db/orders.json");
-var loadedOrders = JsonUtils.Load(ordersFile, new List<Order>());
-Console.WriteLine($"Loaded {loadedOrders.Count} orders from file {ordersFile.FullName}");
+
+JsonUtils.Load(productsFile, new List<Product>());
+JsonUtils.Load(ordersFile, new List<Order>());
+
+var productExtentTotalCount = Product.All.Count;
+var orderExtentTotalCount = Order.All.Count;
+
+Console.WriteLine($"Now in extent {productExtentTotalCount} products.");
+Console.WriteLine($"Now in extent {orderExtentTotalCount} orders.");
 
 // -----< Add Some Data If Nothing Loaded >-----
-if (loadedProducts.Count == 0 && loadedOrders.Count == 0)
+if (productExtentTotalCount == 0 && orderExtentTotalCount == 0)
 {
     try
     {
@@ -58,7 +62,7 @@ if (loadedProducts.Count == 0 && loadedOrders.Count == 0)
 // ----------< Output >----------
 Console.WriteLine("Product.All:");
 foreach (var product in Product.All)
-    Console.WriteLine(product);
+    Console.WriteLine(product.Name);
 
 Console.WriteLine("\n----------------------------------------\n");
 
