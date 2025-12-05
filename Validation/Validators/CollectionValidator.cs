@@ -1,30 +1,32 @@
 namespace BYTPRO.Data.Validation.Validators;
 
 using System.Collections.Generic;
-using System.Linq;
 
 public static class CollectionValidator
 {
-    public static bool IsNotNullOrEmpty<T>(this IEnumerable<T>? collection, string fieldName = "ICollection")
+    public static void IsNotNullOrEmpty<T>(this ICollection<T>? collection, string fieldName = "ICollection")
     {
-        if (collection == null || !collection.Any())
+        if (collection == null || collection.Count == 0)
             throw new ValidationException($"{fieldName} cannot be null or empty.");
-        
-        return true;
     }
 
-    public static bool AreAllStringsNotNullOrEmpty(this IEnumerable<string?> collection, string fieldName = "ICollection")
+    public static void AreAllStringsNotNullOrEmpty(this ICollection<string>? collection, string fieldName = "ICollection")
     {
-        var enumerable = collection.ToList();
-        enumerable.IsNotNullOrEmpty(fieldName);
+        IsNotNullOrEmpty(collection, fieldName);
 
-        var list = collection as IList<string?> ?? enumerable.ToList();
-
-        for (var i = 0; i < list.Count; i++)
+        var index = 0;
+        foreach (var item in collection!)
         {
-            list[i].IsNotNullOrEmpty($"{fieldName}[{i}]");
+            item.IsNotNullOrEmpty($"{fieldName}[{index}]");
+            index++;
         }
-        
-        return true;
+    }
+
+    public static void AreAllElementsNotNull<T>(this ICollection<T>? collection, string fieldName = "ICollection")
+    {
+        IsNotNullOrEmpty(collection, fieldName);
+
+        if (collection!.Any(item => item == null))
+            throw new ValidationException($"{fieldName} contains a null element.");
     }
 }
