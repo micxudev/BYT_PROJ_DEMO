@@ -1,7 +1,8 @@
+using _PRO.Validation.Validators;
+
 namespace _PRO.Models;
 
 using Newtonsoft.Json;
-using BYTPRO.Data.Validation.Validators;
 
 public class Product
 {

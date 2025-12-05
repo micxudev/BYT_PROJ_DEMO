@@ -1,6 +1,7 @@
+using _PRO.Validation.Validators;
+
 namespace _PRO.Models;
 
-using BYTPRO.Data.Validation.Validators;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

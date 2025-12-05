@@ -1,6 +1,4 @@
-namespace BYTPRO.Data.Validation.Validators;
-
-using System.Collections.Generic;
+namespace _PRO.Validation.Validators;
 
 public static class CollectionValidator
 {
