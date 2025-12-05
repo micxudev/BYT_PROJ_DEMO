@@ -13,7 +13,7 @@ public class Product
 
 
     // ----------< Attributes >----------
-    private readonly string _name;
+    private readonly string _name = null!;
     private readonly decimal _price;
 
 
@@ -55,7 +55,7 @@ public class Product
     // -----< with attribute >-----
     private readonly HashSet<ProductQuantityInOrder> _usedInOrders = [];
 
-    public HashSet<ProductQuantityInOrder> AssociatedOrders => [.._usedInOrders];
+    [JsonIgnore] public HashSet<ProductQuantityInOrder> AssociatedOrders => [.._usedInOrders];
 
     // TODO: We could accept only Order object, not ProductQuantityInOrder if we need.
     public void AssociateWithOrder(ProductQuantityInOrder orderItem)
