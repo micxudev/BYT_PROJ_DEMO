@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 public static class JsonUtils
 {
     // ----------< JSON Options >----------
-    private static readonly JsonSerializerOptions PrettyOptions = new(JsonSerializerDefaults.General)
+    /*private static readonly JsonSerializerOptions PrettyOptions = new(JsonSerializerDefaults.General)
     {
         WriteIndented = true,
         PropertyNameCaseInsensitive = true,
         AllowTrailingCommas = true
-    };
+    };*/
 
     // ----------< Background Save Queue >----------
     // Single-threaded async queue for non-blocking saves.
@@ -66,7 +66,8 @@ public static class JsonUtils
         try
         {
             var json = File.ReadAllText(file.FullName);
-            var obj = JsonSerializer.Deserialize<T>(json, PrettyOptions);
+            //var obj = JsonConvert.Deserialize<T>(json, PrettyOptions);
+            var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json, JsonSerializerExtensions.Options);
             return obj == null ? defaultValue : obj;
         }
         catch (Exception ex)
@@ -88,7 +89,9 @@ public static class JsonUtils
     {
         try
         {
-            var bytes = JsonSerializer.SerializeToUtf8Bytes(value, PrettyOptions);
+            //var bytes = JsonSerializer.SerializeToUtf8Bytes(value, PrettyOptions);
+            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(value, JsonSerializerExtensions.Options);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(jsonString);
             await WriteBytesToFileAtomicallyAsync(file, bytes);
         }
         catch (Exception ex)

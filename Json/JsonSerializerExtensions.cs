@@ -6,7 +6,7 @@ namespace _PRO.Json;
 
 public static class JsonSerializerExtensions
 {
-    private static readonly JsonSerializerSettings Options = new()
+    public static readonly JsonSerializerSettings Options = new()
     {
         Formatting = Formatting.Indented,
         TypeNameHandling = TypeNameHandling.Auto,
