@@ -46,7 +46,7 @@ public class Order
 
 
     // ----------< Constructor >----------
-    protected Order(
+    public Order(
         DateTime creationDate,
         Dictionary<Product, int> cart)
     {
