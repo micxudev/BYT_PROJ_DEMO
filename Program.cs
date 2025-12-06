@@ -1,12 +1,9 @@
 ﻿using _PRO.Json;
 using _PRO.Models;
 
-// ----------< Try Load From Files >----------
-var productsFile = new FileInfo("./db/products.json");
-var ordersFile = new FileInfo("./db/orders.json");
-
-JsonUtils.Load(productsFile, new List<Product>());
-JsonUtils.Load(ordersFile, new List<Order>());
+// ----------< Try Load From File >----------
+var storageFile = new FileInfo("./db/storage.json");
+JsonUtils.Load(storageFile, new AppState());
 
 var productExtentTotalCount = Product.All.Count;
 var orderExtentTotalCount = Order.All.Count;
@@ -71,8 +68,12 @@ foreach (var order in Order.All)
     Console.WriteLine(order);
 
 
-// ----------< Save To Files >----------
-JsonUtils.SaveAsync(Product.All, productsFile);
-JsonUtils.SaveAsync(Order.All, ordersFile);
+// ----------< Save To File >----------
+var appState = new AppState
+{
+    Products = Product.All.ToList(),
+    Orders = Order.All.ToList()
+};
+JsonUtils.SaveAsync(appState, storageFile);
 
 await JsonUtils.ShutdownSaveExecutorAsync();
