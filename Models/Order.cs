@@ -17,7 +17,7 @@ public class Order
     // ----------< Attributes >----------
     private readonly DateTime _creationDate;
     private OrderStatus _status;
-    private readonly List<(Product Product, int Quantity)> _cart = null!;
+    private readonly List<CartItem> _cart = null!;
 
 
     // ----------< Properties with validation >----------
@@ -44,7 +44,7 @@ public class Order
     }
 
     // TODO: expose getter as read-only (wrap with DeserializableReadOnlyList)
-    public List<(Product Product, int Quantity)> Cart
+    public List<CartItem> Cart
     {
         get => _cart;
         init
@@ -84,7 +84,7 @@ public class Order
     public Order(
         DateTime creationDate,
         OrderStatus status,
-        List<(Product Product, int Quantity)> cart)
+        List<CartItem> cart)
     {
         CreationDate = creationDate;
         Status = status;

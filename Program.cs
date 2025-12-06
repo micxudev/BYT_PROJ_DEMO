@@ -30,13 +30,13 @@ if (productExtentTotalCount == 0 && orderExtentTotalCount == 0)
         var o1 = new Order(
             DateTime.Now,
             OrderStatus.InProgress,
-            [(p1, 1)]
+            [new CartItem(p1, 1)]
         );
 
         var o2 = new Order(
             DateTime.Now,
             OrderStatus.InProgress,
-            [(p1, 2), (p2, 3)]
+            [new CartItem(p1, 2), new CartItem(p2, 3)]
         );
     }
     catch (Exception ex)
