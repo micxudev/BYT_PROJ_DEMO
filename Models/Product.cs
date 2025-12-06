@@ -1,3 +1,4 @@
+using _PRO.Validation;
 using _PRO.Validation.Validators;
 
 namespace _PRO.Models;
@@ -61,7 +62,8 @@ public class Product
     public void AssociateWithOrder(ProductQuantityInOrder orderItem)
     {
         orderItem.IsNotNull(nameof(orderItem));
-        this.Equals(orderItem.Product, nameof(orderItem.Product));
+        if (orderItem.Product != this)
+            throw new ValidationException($"{nameof(orderItem.Product)} must reference this Product instance.");
         _usedInOrders.Add(orderItem);
     }
 }
