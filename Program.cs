@@ -25,22 +25,18 @@ if (productExtentTotalCount == 0 && orderExtentTotalCount == 0)
             "Product 2",
             200m
         );
-        var p3 = new Product(
-            "Product 3",
-            300m
-        );
 
         // -----< Orders >-----
         var o1 = new Order(
             DateTime.Now,
             OrderStatus.InProgress,
-            [(p1, 2), (p2, 3)]
+            [(p1, 1)]
         );
 
         var o2 = new Order(
             DateTime.Now,
             OrderStatus.InProgress,
-            [(p2, 4), (p3, 6)]
+            [(p1, 2), (p2, 3)]
         );
     }
     catch (Exception ex)
