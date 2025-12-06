@@ -33,19 +33,14 @@ if (productExtentTotalCount == 0 && orderExtentTotalCount == 0)
         // -----< Orders >-----
         var o1 = new Order(
             DateTime.Now,
-            new Dictionary<Product, int>
-            {
-                { p1, 2 },
-                { p2, 3 }
-            }
+            OrderStatus.InProgress,
+            [(p1, 2), (p2, 3)]
         );
+
         var o2 = new Order(
             DateTime.Now,
-            new Dictionary<Product, int>
-            {
-                { p2, 4 },
-                { p3, 6 }
-            }
+            OrderStatus.InProgress,
+            [(p2, 4), (p3, 6)]
         );
     }
     catch (Exception ex)

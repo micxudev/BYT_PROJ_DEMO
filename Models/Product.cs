@@ -58,7 +58,6 @@ public class Product
 
     [JsonIgnore] public HashSet<ProductQuantityInOrder> AssociatedOrders => [.._usedInOrders];
 
-    // TODO: We could accept only Order object, not ProductQuantityInOrder if we need.
     public void AssociateWithOrder(ProductQuantityInOrder orderItem)
     {
         orderItem.IsNotNull(nameof(orderItem));
